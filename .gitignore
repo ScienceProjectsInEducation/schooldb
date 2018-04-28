@@ -1,0 +1,9 @@
+.tmp
+node_modules
+data/Schulliste_Mia_2017_02_26_Raw.csv
+data/Schulliste_Abiturpreis_2017_02_26_Raw.csv
+npm-debug.log
+.env
+*.csv
+release-builds
+nbproject

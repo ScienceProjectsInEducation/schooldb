@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+    window.$ = window.jQuery = require("./node_modules/jquery");
+</script>
+
+     <link href="./node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        table {
+            font-size: 12px;
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding: 0.2em;
+            line-height: 1em;
+        }
+        .input-group .form-control, .input-group-addon, .input-group-btn{
+            font-size: 12px;
+            padding: 0.2em;
+            line-height: 1em;
+            height: auto;
+        }
+        .btn-default, input, select, .form-control {
+            border: 0;
+            border-radius: 0.2em;
+            box-sizing: border-box;
+        }
+        .form-control {
+
+            border: 1px solid #8aa0a9;
+        }
+        .btn-default, input, select {
+            background: #8aa0a9;
+            color: white;
+        }
+        .btn-default {
+            padding: 0.3em;
+        }
+        select {
+            margin-right: 0.4em;
+        }
+        tr:nth-child(even) td {
+            background: #eee;
+        }
+        .gmap {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+  <title>Schools Database</title>
+</head>
+<body>
+  <script>require('./window')</script>
+</body>
+ <script>
+   require("./node_modules/bootstrap/dist/js/bootstrap");
+</script>
+<script>
+    require("./node_modules/bootstrap-notify/bootstrap-notify");
+</script>
+<script>
+    require("./node_modules/google-maps/lib/Google")
+</script>
+</html>
