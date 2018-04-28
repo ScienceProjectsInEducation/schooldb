@@ -3,6 +3,7 @@ const electron = require('electron')
 const {ipcRenderer} = electron
 const devtools = require('choo-devtools')
 const choo = require('choo')
+const Settings = require('electron-store')
 const features = require('./views/FeaturesView')
 const matchfinderView = require('./views/matchfinderView')
 const changeView = require('./views/changeView')
@@ -15,8 +16,10 @@ const $ = require('jquery')
 const historyView = require('./views/historyView')
 const html = require('choo/html')
 
+const settings = new Settings()
+
 const GoogleMapsLoader = require('google-maps')
-GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
+GoogleMapsLoader.KEY = settings.get('googleMapsKey')
 GoogleMapsLoader.LANGUAGE = 'de'
 
 var app = choo()

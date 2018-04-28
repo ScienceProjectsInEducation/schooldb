@@ -1,7 +1,11 @@
 const html = require('choo/html')
 const electron = require('electron')
+const Store = require('electron-store')
 const {ipcRenderer} = electron
 const $ = require('jquery')
+
+const settings = new Store()
+
 module.exports = function (emit) {
   return html`
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -34,6 +38,9 @@ module.exports = function (emit) {
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" onclick=${() => { ipcRenderer.send('invalidateActions'); $(window).scrollTop(0) }} href="#actions">Actions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick=${() => { settings.openInEditor() }}>Settings</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

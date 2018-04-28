@@ -2,7 +2,8 @@ const electron = require('electron')
 const url = require('url')
 const path = require('path')
 const _ = require('lodash')
-const envalid = require('envalid')
+const Store = require('electron-store')
+const electronDebug = require('electron-debug')
 const createDatabase = require('./lib/database')
 const CsvImportExport = require('./lib/csv')
 const compareSchools = require('./lib/compare-schools')
@@ -13,17 +14,20 @@ const loadActions = require('./lib/actions')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const Datahandler = require('./lib/showData')
-const env = envalid.cleanEnv(process.env, {
-  MYSQL: envalid.url({
-    devDefault: 'mysql://root@localhost:3306/kischule'
-  }),
-  NODE_ENV: envalid.str({default: 'development'})
-})
 const {mysteriousValue} = require('./lib/mysteriousValue')
 const parallel = require('run-parallel')
 
+electronDebug()
+
+const settings = new Store({
+  defaults: {
+    db: 'mysql://root@localhost:3306/kischule',
+    googleMapsKey: null
+  }
+})
+
 const googleMapsClient = require('@google/maps').createClient({
-  key: process.env.GOOGLE_API_KEY,
+  key: settings.get('googleMapsKey'),
   language: 'de'
 })
 
@@ -32,7 +36,7 @@ const {app, BrowserWindow, Menu, ipcMain} = electron
 let mainWindow
 
 async function start () {
-  const {School, Action, Match, DontMerge, SourceType, Source, sequelize} = await createDatabase(env.MYSQL)
+  const {School, Action, Match, DontMerge, SourceType, Source, sequelize} = await createDatabase(settings.get('db'))
   showSchoolCount(School)
   loadSourceEnum(SourceType)
   var DataRender = new Datahandler(School)
@@ -392,25 +396,6 @@ async function start () {
   ]
 
   if (process.platform === 'darwin') mainMenuTemplate.unshift({})
-
-  // Dev tools if not in prod
-  if (!env.isProduction) {
-    mainMenuTemplate.push({
-      label: 'Developer Tools',
-      submenu: [
-        {
-          label: 'Toggle DevTools',
-          accelerator: process.platform === 'darwin' ? 'Command+I' : 'Ctrl+I',
-          click (item, focusedWindow) {
-            focusedWindow.toggleDevTools()
-          }
-        },
-        {
-          role: 'reload'
-        }
-      ]
-    })
-  }
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
   Menu.setApplicationMenu(mainMenu)
