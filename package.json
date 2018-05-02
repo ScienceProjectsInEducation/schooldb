@@ -59,6 +59,7 @@
     "standard": "^11.0.1"
   },
   "release": {
+    "prepare": [],
     "verifyConditions": ["@semantic-release/github"],
     "publish": [{
       "path": "@semantic-release/github",
