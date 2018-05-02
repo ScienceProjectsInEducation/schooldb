@@ -53,7 +53,18 @@
     "sequelize": "^4.34.0"
   },
   "devDependencies": {
+    "@semantic-release/github": "^4.2.15",
     "npm-run-all": "^4.1.2",
+    "semantic-release": "^15.2.0",
     "standard": "^11.0.1"
+  },
+  "release": {
+    "verifyConditions": ["@semantic-release/github"],
+    "publish": [{
+      "path": "@semantic-release/github",
+      "assets": ["release-builds/*.tar.gz"]
+    }],
+    "success": ["@semantic-release/github"],
+    "fail": ["@semantic-release/github"]
   }
 }
