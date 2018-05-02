@@ -1,16 +1,17 @@
 {
-  "name": "schuldatenbank",
+  "name": "schooldb",
   "version": "1.0.0",
-  "description": "tool to handle schuldatenbank",
+  "description": "tool to handle schooldb",
   "main": "main.js",
   "scripts": {
     "start": "electron . ",
     "test": "npm run lint",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
-    "package-win": "electron-packager . schuldatenbank --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"KI-Schule\"",
-    "package-linux": "electron-packager . schuldatenbank --overwrite --asar=true --platform=linux --arch=x64 --prune=true --out=release-builds"
+    "package": "run-p package:*",
+    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "package:win": "electron-packager . schooldb --overwrite --asar --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"KI-Schule\"",
+    "package:linux": "electron-packager . schooldb --overwrite --asar --platform=linux --arch=x64 --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
